@@ -1,1 +1,5 @@
 windows-curses
+logging
+tempfile
+shutil
+hashlib
