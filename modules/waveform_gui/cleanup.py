@@ -41,3 +41,5 @@ def delete_files_from_folder(folder_path):
             progress_bar.update(1)
 
     print(f"All files have been deleted from the folder {folder_path}.")
+    
+delete_files_from_folder("./mp4")
