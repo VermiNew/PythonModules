@@ -40,7 +40,7 @@ pygame.mouse.set_visible(0)
 screen = pygame.display.set_mode(SIZE)
 
 # Load the music file
-wf = wave.open(current_path + input("Enter the path to the WAV file: "), 'rb')
+wf = wave.open(current_path + "/" + input("Enter the path to the WAV file: "), 'rb')
 
 # Create PyAudio object
 p = pyaudio.PyAudio()
