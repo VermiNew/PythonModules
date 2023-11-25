@@ -3,3 +3,4 @@ pygame
 pyaudio
 moviepy
 tqdm
+yt-dlp
