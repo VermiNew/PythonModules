@@ -35,7 +35,7 @@ TK_SIZE = (400, 180)
 
 # Initialize Pygame
 pygame.init()
-pygame.display.set_caption('Podgląd fali dźwiękowej')
+pygame.display.set_caption('Waveform Drawer Window')
 pygame.mouse.set_visible(0)
 screen = pygame.display.set_mode(SIZE)
 
