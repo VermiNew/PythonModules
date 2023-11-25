@@ -1,1 +1,5 @@
 windows-curses
+pygame
+pyaudio
+moviepy
+tqdm
