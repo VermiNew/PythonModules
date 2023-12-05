@@ -4,3 +4,5 @@ pyaudio
 moviepy
 tqdm
 yt-dlp
+colorama
+cryptography
