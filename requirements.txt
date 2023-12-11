@@ -1,8 +1,20 @@
+# User interface
 windows-curses
+
+# Graphics and multimedia
 pygame
-pyaudio
 moviepy
-tqdm
+opencv-python
+
+# Audio handling
+pyaudio
+
+# Internet data retrieval
 yt-dlp
+
+# Progress monitoring and messages
+tqdm
 colorama
+
+# Cryptography
 cryptography
