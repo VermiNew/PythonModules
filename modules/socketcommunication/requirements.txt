@@ -1,0 +1,5 @@
+# Crypto Libraries
+cryptography
+
+# Terminal text styling
+colorama
