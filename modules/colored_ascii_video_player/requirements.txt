@@ -1,0 +1,5 @@
+# Video processing
+opencv-python
+
+# Terminal text styling
+colorama
