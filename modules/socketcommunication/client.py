@@ -1,6 +1,8 @@
 import socket
 from cryptography.fernet import Fernet
-from colorama import Fore, Style
+from colorama import Fore, Style, init
+
+init(autoreset=True)
 
 def generate_key():
     return Fernet.generate_key()
