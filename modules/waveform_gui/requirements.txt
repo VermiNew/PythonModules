@@ -1,0 +1,10 @@
+# Audio Processing
+pygame
+pyaudio
+moviepy
+
+# File Operations
+tqdm
+
+# Web Scraping
+yt-dlp
