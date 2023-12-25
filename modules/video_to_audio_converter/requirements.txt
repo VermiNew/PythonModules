@@ -1,0 +1,5 @@
+# Terminal color formatting library
+colorama
+
+# Video editing library for processing and converting videos
+moviepy

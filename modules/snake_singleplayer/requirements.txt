@@ -1,0 +1,5 @@
+# Pygame library for creating games
+pygame
+
+# Colorama library for adding colored output to the console
+colorama
