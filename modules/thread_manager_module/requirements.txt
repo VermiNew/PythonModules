@@ -1,0 +1,5 @@
+# Colorama library for colored output in the console
+colorama
+
+# Rich library for enhanced console output
+rich
