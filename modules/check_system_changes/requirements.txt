@@ -1,0 +1,2 @@
+# Colorama library for colored terminal output
+colorama==0.4.4
