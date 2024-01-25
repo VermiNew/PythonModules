@@ -1,0 +1,5 @@
+# tqdm is used for progress bar functionality
+tqdm
+
+# colorama is used for colored text output in the terminal
+colorama

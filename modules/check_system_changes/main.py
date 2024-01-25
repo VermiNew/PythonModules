@@ -41,7 +41,7 @@ class FileChecker:
             print(f"  {Fore.YELLOW}Show Skipped:{Style.RESET_ALL} {show_skipped}\n")
 
             if debug:
-                print("Debug mode enabled. Working...")
+                print(f"{Fore.GREEN}Debug mode enabled. Working...{Style.RESET_ALL}")
 
             # Traverse the directory and check for file changes
             for root, dirs, files in os.walk(directory_path):
@@ -69,7 +69,7 @@ class FileChecker:
                     # Display iteration in debug mode
                     if debug:
                         self.iteration += 1
-                        print(f"Iteration: {self.iteration}", end="\r")
+                        print(f"{Fore.CYAN}Scanned: {Fore.LIGHTBLUE_EX}{self.iteration}{Style.RESET_ALL}", end="\r")
 
             # Print results after checking changes
             if self.found_files:
