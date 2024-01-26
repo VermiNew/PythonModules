@@ -1,0 +1,8 @@
+# colorama - Library for colored terminal text
+colorama
+
+# requests - HTTP library for making requests
+requests
+
+# tqdm - Fast, extensible progress bar for loops and CLI
+tqdm

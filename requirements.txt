@@ -25,5 +25,8 @@ colorama       # Cross-platform colored terminal text
 # Cryptography
 cryptography   # Cryptographic recipes and primitives
 
+# HTTP library for making requests
+requests
+
 # Rich library for enhanced console output
 rich           # Rich text and beautiful formatting in the terminal

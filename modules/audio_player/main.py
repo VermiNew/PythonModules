@@ -134,7 +134,7 @@ def validate_file_path(file_path):
     return True
 
 def main():
-    parser = argparse.ArgumentParser(add_help=False)
+    parser = argparse.ArgumentParser(description="Audio Player", add_help=False)
     parser.add_argument("file_path", nargs='?', help="Path to the audio file")
     parser.add_argument("-l", "--length", type=str, default="50", help="Max length of the volume bar or 'full_width'")
     parser.add_argument("-v", "--volume", type=float, default=1.0, help="Volume scale factor (default: 1.0)")
