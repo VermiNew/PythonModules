@@ -5,6 +5,8 @@ from colorama import Fore, Style, init, deinit
 import ctypes
 import re
 
+init(autoreset=True)
+
 class TreeStructureCreator:
     def __init__(self, args):
         self.args = args
@@ -72,7 +74,6 @@ class TreeStructureCreator:
             return
 
         if not self.args.silent:
-            init()  # Initialize colorama for colored text output
             print(f"{Fore.BLUE}Starting scan...{Style.RESET_ALL}")
 
         with open(self.args.error_log_file, 'w', encoding='utf-8') as self.error_file:

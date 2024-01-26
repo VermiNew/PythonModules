@@ -8,7 +8,7 @@ from tkinter import Tk, Label, Entry, Button, StringVar, filedialog, messagebox,
 
 class FileChecker:
     def __init__(self):
-        init()  # Initialize colorama
+        init(autoreset=True)  # Initialize colorama
         self.found_files = []
         self.iteration = 0
         self.running = False

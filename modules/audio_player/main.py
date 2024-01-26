@@ -7,7 +7,9 @@ import sys
 import shutil
 import os
 from scipy.signal import resample
-from colorama import Fore, Style
+from colorama import Fore, Style, init
+
+init(autoreset=True)
 
 class AudioPlayer:
     def __init__(self, file_path, max_bar_length=50, volume_scale=1.0, pitch_shift=0.0, show_info=False):
