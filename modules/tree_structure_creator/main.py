@@ -93,24 +93,28 @@ class TreeStructureCreator:
             deinit()  # Deinitialize colorama
 
 
+def show_help():
+    print(f"{Fore.LIGHTMAGENTA_EX}Tree Structure Creator{Style.RESET_ALL}\n"
+          "Scan a directory and create a detailed structure report.\n\n"
+          "Usage:\n"
+          f"  {Fore.LIGHTGREEN_EX}python main.py {Fore.LIGHTCYAN_EX}--path <path> [--output_file <output_file>] [--error_log_file <error_log_file>] [--silent] [--no_beep]{Style.RESET_ALL}\n"
+          f"  {Fore.LIGHTGREEN_EX}python main.py {Fore.LIGHTCYAN_EX}--gui{Style.RESET_ALL}\n\n"
+          "Options:\n"
+          f"  {Fore.LIGHTCYAN_EX}--path{Fore.WHITE}              Path of the directory to scan\n"
+          f"  {Fore.LIGHTCYAN_EX}--output_file{Fore.WHITE}       File to save the scanned directory structure\n"
+          f"  {Fore.LIGHTCYAN_EX}--error_log_file{Fore.WHITE}    File to log errors during scanning\n"
+          f"  {Fore.LIGHTCYAN_EX}--silent{Fore.WHITE}            Run in silent mode (no prints or progress bar)\n"
+          f"  {Fore.LIGHTCYAN_EX}--no_beep{Fore.WHITE}           Disable beep sound on completion\n"
+          f"  {Fore.LIGHTCYAN_EX}--gui{Fore.WHITE}               Use GUI mode to enter parameters\n"
+          f"  {Fore.LIGHTCYAN_EX}--help{Fore.WHITE}              Show this help message and exit\n\n"
+          "Examples:\n"
+          f"  {Fore.LIGHTGREEN_EX}python main.py {Fore.LIGHTCYAN_EX}--path \"C:\\Users\"{Style.RESET_ALL}\n"
+          f"  {Fore.LIGHTGREEN_EX}python main.py {Fore.LIGHTCYAN_EX}--gui{Style.RESET_ALL}")
+
 def main():
     parser = argparse.ArgumentParser(
-        description=f"{Fore.LIGHTMAGENTA_EX}Tree Structure Creator{Style.RESET_ALL}\n"
-                    "Scan a directory and create a detailed structure report.\n\n"
-                    "Usage:\n"
-                    f"  {Fore.LIGHTGREEN_EX}python main.py {Fore.LIGHTCYAN_EX}--path <path> [--output_file <output_file>] [--error_log_file <error_log_file>] [--silent] [--no_beep]{Style.RESET_ALL}\n"
-                    f"  {Fore.LIGHTGREEN_EX}python main.py {Fore.LIGHTCYAN_EX}--gui{Style.RESET_ALL}\n\n"
-                    "Options:\n"
-                    f"  {Fore.LIGHTCYAN_EX}--path{Fore.WHITE}              Path of the directory to scan\n"
-                    f"  {Fore.LIGHTCYAN_EX}--output_file{Fore.WHITE}       File to save the scanned directory structure\n"
-                    f"  {Fore.LIGHTCYAN_EX}--error_log_file{Fore.WHITE}    File to log errors during scanning\n"
-                    f"  {Fore.LIGHTCYAN_EX}--silent{Fore.WHITE}            Run in silent mode (no prints or progress bar)\n"
-                    f"  {Fore.LIGHTCYAN_EX}--no_beep{Fore.WHITE}           Disable beep sound on completion\n"
-                    f"  {Fore.LIGHTCYAN_EX}--gui{Fore.WHITE}               Use GUI mode to enter parameters\n\n"
-                    "Examples:\n"
-                    f"  {Fore.LIGHTGREEN_EX}python main.py {Fore.LIGHTCYAN_EX}--path \"C:\\Users\"{Style.RESET_ALL}\n"
-                    f"  {Fore.LIGHTGREEN_EX}python main.py {Fore.LIGHTCYAN_EX}--gui{Style.RESET_ALL}",
-        formatter_class=argparse.RawTextHelpFormatter
+        add_help=False,
+        description="Tree Structure Creator - Scan a directory and create a detailed structure report."
     )
     parser.add_argument("--path", help="Path of the directory to scan")
     parser.add_argument("--output_file", default="structure.txt", help="File to save the scanned directory structure")
@@ -118,8 +122,13 @@ def main():
     parser.add_argument("--silent", action="store_true", help="Run in silent mode (no prints or progress bar)")
     parser.add_argument("--no_beep", action="store_true", help="Disable beep sound on completion")
     parser.add_argument("--gui", action="store_true", help="Use GUI mode to enter parameters")
+    parser.add_argument("--help", action="store_true", help="Show this help message and exit")
 
     args = parser.parse_args()
+
+    if args.help:
+        show_help()
+        return
 
     if args.gui:
         print(f"\n{Fore.LIGHTMAGENTA_EX}{'*' * 60}\n{'*' + ' ' * 58 + '*'}\n*{'Welcome to the Tree Structure Creator!'.center(58)}*\n{'*' + ' ' * 58 + '*'}\n{'*' * 60}{Style.RESET_ALL}\n")

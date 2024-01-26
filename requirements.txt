@@ -1,23 +1,29 @@
+# Basic audio playback and manipulation
+numpy
+soundfile
+sounddevice
+scipy
+
 # User interface
-windows-curses
+windows-curses  # Windows support for curses (console user interface library)
 
 # Graphics and multimedia
-pygame
-moviepy
-opencv-python
+pygame         # Library for writing video games and multimedia applications
+moviepy        # Video editing library
+opencv-python  # OpenCV for computer vision and image processing
 
 # Audio handling
-pyaudio
+pyaudio        # Cross-platform audio I/O library
 
 # Internet data retrieval
-yt-dlp
+yt-dlp         # Command-line program to download videos from YouTube and other sites
 
 # Progress monitoring and messages
-tqdm
-colorama
+tqdm           # Fast, extensible progress bar
+colorama       # Cross-platform colored terminal text
 
 # Cryptography
-cryptography
+cryptography   # Cryptographic recipes and primitives
 
 # Rich library for enhanced console output
-rich==10.11.0
+rich           # Rich text and beautiful formatting in the terminal

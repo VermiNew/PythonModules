@@ -1,0 +1,14 @@
+# numpy is used for numerical operations, especially with arrays
+numpy
+
+# soundfile is used for reading and writing sound files (like WAV)
+soundfile
+
+# sounddevice is used for playing audio
+sounddevice
+
+# scipy is used here for signal processing, particularly for resampling audio
+scipy
+
+# colorama is used for colored terminal text
+colorama
