@@ -110,8 +110,7 @@ Options:
 {Fore.RED}Note:{Style.RESET_ALL}
     Ensure URLs are quoted if they contain special characters.
     The --gui option allows for interactive input but ignores other command line arguments.
-    The --no-beep option is useful in environments where a beep sound is not desired.
-"""
+    The --no-beep option is useful in environments where a beep sound is not desired."""
         print(help_text)
 
 def main():

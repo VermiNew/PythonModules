@@ -120,8 +120,7 @@ def print_help():
 
     {Fore.RED}Note:{Style.RESET_ALL}
         Increasing the volume beyond normal limits can cause audio distortion or damage to your speakers.
-        Use the '--no-volume-limit' option with caution.
-    """
+        Use the '--no-volume-limit' option with caution."""
     print(help_text)
 
 def validate_file_path(file_path):

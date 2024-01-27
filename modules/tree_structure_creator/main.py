@@ -95,7 +95,7 @@ class TreeStructureCreator:
 
 
 def show_help():
-    print(f"{Fore.LIGHTMAGENTA_EX}Tree Structure Creator{Style.RESET_ALL}\n"
+    print(f"\n{Fore.LIGHTMAGENTA_EX}Tree Structure Creator{Style.RESET_ALL}\n"
           "Scan a directory and create a detailed structure report.\n\n"
           "Usage:\n"
           f"  {Fore.LIGHTGREEN_EX}python main.py {Fore.LIGHTCYAN_EX}--path <path> [--output_file <output_file>] [--error_log_file <error_log_file>] [--silent] [--no_beep]{Style.RESET_ALL}\n"

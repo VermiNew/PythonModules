@@ -199,7 +199,7 @@ def print_help_and_exit():
     print(f"{Fore.GREEN}main.py {Fore.LIGHTBLUE_EX}--gui{Style.RESET_ALL}\n")
     print(f"{Fore.CYAN}Notes:{Style.RESET_ALL}")
     print("- In GUI mode, command-line options are not required.")
-    print(f"- The default output file is {Fore.GREEN}'output.txt'{Style.RESET_ALL} if {Fore.GREEN}--output{Style.RESET_ALL} is not specified.\n")
+    print(f"- The default output file is {Fore.GREEN}'output.txt'{Style.RESET_ALL} if {Fore.GREEN}--output{Style.RESET_ALL} is not specified.")
     exit()
 
 if __name__ == "__main__":
