@@ -42,6 +42,7 @@ try:
 except KeyboardInterrupt:
     pass  
 except Exception as e:
+    print(e)
     console.print_exception(show_locals=True)
 finally:
     try:
@@ -50,4 +51,5 @@ finally:
         # Cleanup
         thread_manager.cleanup()
     except Exception as e:
+        print(e)
         console.print_exception(show_locals=True)
