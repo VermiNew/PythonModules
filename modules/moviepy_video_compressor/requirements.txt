@@ -1,0 +1,5 @@
+# moviepy is used for video processing, including resizing and changing bitrate
+moviepy
+
+# colorama is used for colored terminal output to enhance readability
+colorama
