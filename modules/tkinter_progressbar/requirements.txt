@@ -1,0 +1,2 @@
+# Colorama is used for colored terminal output
+colorama
