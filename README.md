@@ -36,6 +36,8 @@ To use the modules in this repository, you'll need:
 
 ### Installation
 
+#### Manual Installation
+
 1. **Clone the Repository:**
    ```
    git clone https://github.com/VermiNew/PythonModules.git
@@ -53,6 +55,19 @@ To use the modules in this repository, you'll need:
    pip install -r requirements.txt
    ```
    This ensures that you have all the necessary libraries for that particular project.
+
+#### Automated Installation for Windows Users
+
+For Windows users, an `execute.bat` script is provided to automate the setup process. This script prepares a virtual environment, installs all required packages, and indicates when the setup is complete and ready for use. To use this script:
+
+1. Open a command prompt in the root directory of the cloned repository.
+2. Run the `execute.bat` script by typing:
+   ```
+   .\execute.bat
+   ```
+3. Follow any on-screen instructions. The script will set up a virtual environment, install necessary dependencies, and notify you when it's ready.
+
+This automated setup is designed to simplify the installation process on Windows, ensuring that you can quickly get started with the projects in the repository.
 
 ## Usage
 
