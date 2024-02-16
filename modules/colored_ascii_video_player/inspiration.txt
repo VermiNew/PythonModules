@@ -1,0 +1,7 @@
+Inspiration:
+Project: Colored ASCII Video
+Author: DvorakDwarf
+URL: https://github.com/DvorakDwarf/Colored-ASCII-Video/blob/main/bapple.py
+
+Description:
+The project "Colored ASCII Video" by DvorakDwarf inspired me to explore the possibilities of converting video into colored ASCII animations. I am fascinated by how Python can be used to create visual representations of video data, motivating me to work on my own module that explores similar concepts.
