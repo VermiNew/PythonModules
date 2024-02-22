@@ -28,5 +28,8 @@ cryptography   # Cryptographic recipes and primitives
 # HTTP library for making requests
 requests
 
+# Flask is the main framework used for web development.
+flask
+
 # Rich library for enhanced console output
 rich           # Rich text and beautiful formatting in the terminal

@@ -1,0 +1,67 @@
+body {
+  height: 100vh;
+  margin: 0;
+  background: #121212;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  position: absolute;
+  transform: scale(0);
+  width: 800px;
+  height: 600px;
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+.content {
+  color: #fff;
+  opacity: 0;
+}
+
+.buttons {
+  opacity: 0;
+  position: fixed;
+  width: 100vw;
+  bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.buttons button {
+  background-color: #343a40;
+  color: white;
+  border: none;
+  opacity: 0.5;
+  animation: fadeInOut 6s infinite;
+}
+
+.progress {
+  background-color: #343a40;
+  height: 5px;
+}
+
+@keyframes fadeInOut {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
