@@ -71,7 +71,7 @@ class VideoPlayer:
         file_path = self.file_entry.get()
 
         try:
-            fps = float(self.fps_entry.get())
+            self.fps = float(self.fps_entry.get())
         except ValueError:
             messagebox.showerror("Error", "Invalid FPS value")
             return
@@ -89,13 +89,17 @@ class VideoPlayer:
     def play_video(self, file_path, palette_choice, mode):
         try:
             video = cv2.VideoCapture(file_path)
-            frame_time = 1 / fps
 
+            frames = []
             while True:
                 success, image = video.read()
                 if not success:
                     break  # Przerwanie pętli, jeśli nie ma więcej klatek
+                frames.append(image)
 
+            frame_time = 1 / self.fps
+
+            for image in frames:
                 start_time = time.time()
                 self.print_frame(image, frame_time, palettes[palette_choice], mode)
                 processing_time = time.time() - start_time
@@ -106,8 +110,8 @@ class VideoPlayer:
         except Exception as e:
             print(f"An error occurred: {e}")
         finally:
-            video.release()  # Pamiętaj, aby zwolnić zasoby
-            print("\x1b[0m")  # Przywrócenie domyślnych kolorów terminala
+            video.release()
+            print("\x1b[0m")
             sys.stdout.flush()
 
     def on_close(self):
