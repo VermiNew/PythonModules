@@ -1,0 +1,8 @@
+# Matplotlib is used for plotting the ping results in real-time
+matplotlib
+
+# Colorama is used for adding color to terminal text, making it more user-friendly
+colorama
+
+# Rich is used for enhanced error tracebacks, providing better error information
+rich
