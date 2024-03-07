@@ -31,5 +31,8 @@ requests
 # Flask is the main framework used for web development.
 flask
 
+# Library for creating static, interactive, and animated visualizations
+matplotlib
+
 # Rich library for enhanced console output
 rich           # Rich text and beautiful formatting in the terminal
