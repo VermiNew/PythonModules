@@ -29,7 +29,9 @@ class PingPlotter:
             while True:
                 if (
                     input(
-                        f"{Fore.LIGHTMAGENTA_EX}Do you want to close graph? (Y/N): {Style.RESET_ALL}\n{Fore.LIGHTCYAN_EX}> {Fore.LIGHTBLUE_EX}"
+                        f"{Fore.LIGHTMAGENTA_EX}Do you want to close graph? "
+                        f"({Fore.LIGHTYELLOW_EX}Y{Fore.LIGHTMAGENTA_EX} to close):"
+                        f"{Style.RESET_ALL}\n{Fore.LIGHTCYAN_EX}> {Fore.LIGHTBLUE_EX}"
                     ).lower()
                     == "y"
                 ):
@@ -61,7 +63,7 @@ class PingPlotter:
                     self.line.set_data(range(len(self.delays)), self.delays)
                     percentage = (self.current_ping / self.count) * 100
                     logging.info(
-                        f"{Fore.GREEN}Status:{Style.RESET_ALL} {Fore.LIGHTBLACK_EX}Working...{Style.RESET_ALL} "
+                        f"{Fore.LIGHTBLACK_EX}Status:{Style.RESET_ALL} {Fore.LIGHTGREEN_EX}Working...{Style.RESET_ALL} "
                         f"{self.current_ping} / {self.count} {Fore.CYAN}(Progress: {percentage:.1f}%){Style.RESET_ALL}"
                     )
                 else:
