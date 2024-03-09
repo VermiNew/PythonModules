@@ -24,21 +24,13 @@ class PingPlotter:
         self.delays = []
         self.max_delay = 0
         self.current_ping = 0
+        self.average_line = None
         self.animation = None
 
     def update_plot(self, frame):
         if self.current_ping > self.count:
-            while True:
-                if (
-                    input(
-                        f"{Fore.LIGHTMAGENTA_EX}Do you want to close graph? "
-                        f"({Fore.LIGHTYELLOW_EX}Y{Fore.LIGHTMAGENTA_EX} to close):"
-                        f"{Style.RESET_ALL}\n{Fore.LIGHTCYAN_EX}> {Fore.LIGHTBLUE_EX}"
-                    ).lower()
-                    == "y"
-                ):
-                    plt.close(self.fig)
-                    return
+            logging.info(f"{Fore.GREEN}Operation has ended!{Style.RESET_ALL}")
+            return
 
         packet_size_option = f"-l {self.packet_size}" if self.packet_size else ""
         command = f"ping -n 1 {packet_size_option} {self.target}"
@@ -68,6 +60,10 @@ class PingPlotter:
                         f"{Fore.LIGHTBLACK_EX}Status:{Style.RESET_ALL} {Fore.LIGHTGREEN_EX}Working...{Style.RESET_ALL} "
                         f"{self.current_ping} / {self.count} {Fore.CYAN}(Progress: {percentage:.1f}%){Style.RESET_ALL}"
                     )
+                    if percentage < 100 and percentage is not None:
+                        self.ax.set_xlabel(f"Progress: {percentage:.1f}%")
+                    else:
+                        self.ax.set_xlabel("Ping number")
                 else:
                     logging.warning(
                         f"{Fore.YELLOW}No delay found in ping response.{Style.RESET_ALL}"
@@ -77,12 +73,18 @@ class PingPlotter:
                 f"{Fore.RED}An error occurred during ping:{Style.RESET_ALL} {e}"
             )
 
-        if len(self.delays) == self.count:
+        if len(self.delays) > 0:
             average_delay = sum(self.delays) / len(self.delays)
-            logging.info(
-                f"{Fore.LIGHTBLUE_EX}Average: {Fore.LIGHTCYAN_EX}{average_delay:.2f} ms{Style.RESET_ALL}"
-            )
-            self.ax.axhline(
+
+            if len(self.delays) == self.count + 1 and average_delay is not None:
+                logging.info(
+                    f"{Fore.LIGHTBLUE_EX}Average: {Fore.LIGHTCYAN_EX}{average_delay:.2f} ms{Style.RESET_ALL}"
+                )
+
+            if self.average_line is not None:
+                self.average_line.remove()
+
+            self.average_line = self.ax.axhline(
                 y=average_delay,
                 color="purple",
                 linestyle="--",
@@ -90,7 +92,6 @@ class PingPlotter:
                 alpha=0.8,
             )
             self.ax.legend()
-            self.fig.canvas.draw()
 
         self.current_ping += 1
 
@@ -105,15 +106,45 @@ class PingPlotter:
         self.ax.legend()
         self.ax.grid(True)
 
+        try:
+            root = plt.get_current_fig_manager().window
+            screen_width = root.winfo_screenwidth()
+            screen_height = root.winfo_screenheight()
+            root.update_idletasks()
+
+            window_width = root.winfo_reqwidth()
+            window_height = root.winfo_reqheight()
+
+            position_right = int((screen_width / 2) - (window_width / 2)) - 20
+            position_down = int((screen_height / 2) - (window_height / 2)) - 20
+
+            root.geometry(f"+{position_right}+{position_down}")
+            logging.info(
+                f"{Fore.GREEN}Centered the graph window successfully.{Style.RESET_ALL}"
+            )
+        except Exception as e:
+            logging.error(
+                f"{Fore.RED}Error centering graph window: {e}{Style.RESET_ALL}"
+            )
+
+        logging.info(f"{Fore.LIGHTBLACK_EX}Starting animation...{Style.RESET_ALL}")
+
         self.animation = FuncAnimation(
             self.fig,
             self.update_plot,
             blit=False,
             interval=self.interval,
+            repeat=False,
+            frames=self.count,
             cache_frame_data=False,
         )
 
-        plt.show()
+        try:
+            plt.show()
+        except Exception as e:
+            logging.error(
+                f"{Fore.RED}Error displaying graph window: {e}{Style.RESET_ALL}"
+            )
 
 
 class GUI_TextHandler(logging.Handler):
@@ -136,8 +167,24 @@ class GUI:
         self.master = master
         master.title("Connection Ping Visualizer")
         master.resizable(0, 0)
-
         self.init_gui_elements()
+        self.center_window()
+
+    def center_window(self):
+        try:
+            self.master.update_idletasks()
+            width = self.master.winfo_width()
+            height = self.master.winfo_height()
+            screen_width = self.master.winfo_screenwidth()
+            screen_height = self.master.winfo_screenheight()
+            x = int((screen_width / 2) - (width / 2)) - 20
+            y = int((screen_height / 2) - (height / 2)) - 20
+            self.master.geometry(f"{width}x{height}+{x}+{y}")
+            logging.info(
+                f"{Fore.GREEN}Centered the window successfully.{Style.RESET_ALL}"
+            )
+        except Exception as e:
+            logging.error(f"{Fore.RED}Error centering the window: {e}{Style.RESET_ALL}")
 
     def init_gui_elements(self):
         Label(self.master, text="Target (for example, google.com):").grid(
