@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from rich.traceback import install
 from colorama import Fore, Style, init
+from tkinter import Tk, Label, Entry, Button, StringVar, messagebox
+import tkinter.scrolledtext as ScrolledText
 import logging
 
 init(autoreset=True)
@@ -114,61 +116,123 @@ class PingPlotter:
         plt.show()
 
 
-if __name__ == "__main__":
-    while True:
-        target = input(
-            f"{Fore.GREEN}Please enter a target to ping (for example - google.com):{Style.RESET_ALL}\n{Fore.LIGHTCYAN_EX}> {Fore.LIGHTBLUE_EX}"
+class GUI_TextHandler(logging.Handler):
+    def __init__(self, text_widget):
+        super().__init__()
+        self.text_widget = text_widget
+        self.text_widget.config(state="disabled")
+
+    def emit(self, record):
+        msg = self.format(record)
+        msg_clean = re.sub(r"\x1b\[[0-9;]*m", "", msg)
+        self.text_widget.config(state="normal")
+        self.text_widget.insert("end", msg_clean + "\n")
+        self.text_widget.config(state="disabled")
+        self.text_widget.yview("end")
+
+
+class GUI:
+    def __init__(self, master):
+        self.master = master
+        master.title("Connection Ping Visualizer")
+        master.resizable(0, 0)
+
+        self.init_gui_elements()
+
+    def init_gui_elements(self):
+        Label(self.master, text="Target (for example, google.com):").grid(
+            row=0, sticky="W"
         )
-        if not target.strip():
-            logging.warning(
-                f"{Fore.YELLOW}Target cannot be empty. Please enter a valid target. Example: google.com{Style.RESET_ALL}"
-            )
-        else:
-            break
+        self.target_var = StringVar()
+        Entry(self.master, textvariable=self.target_var).grid(row=0, column=1)
 
-    while True:
-        packet_size_input = input(
-            f"{Fore.GREEN}Enter packet size in bytes or leave empty for automatic:{Style.RESET_ALL}\n{Fore.LIGHTCYAN_EX}> {Fore.LIGHTBLUE_EX}"
-        ).strip()
-        if packet_size_input.isdigit() or not packet_size_input:
-            packet_size = (
-                int(packet_size_input) if packet_size_input.isdigit() else None
-            )
-            break
-        else:
-            logging.warning(
-                f"{Fore.YELLOW}Please enter a valid packet size (number) or leave it empty for automatic size.{Style.RESET_ALL}"
-            )
+        Label(self.master, text="Packet size in bytes (optional):").grid(
+            row=1, sticky="W"
+        )
+        self.packet_size_var = StringVar()
+        Entry(self.master, textvariable=self.packet_size_var).grid(row=1, column=1)
 
-    while True:
-        count_input = input(
-            f"{Fore.GREEN}Enter the number of pings (default 10):{Style.RESET_ALL}\n{Fore.LIGHTCYAN_EX}> {Fore.LIGHTBLUE_EX}"
-        ).strip()
-        if count_input.isdigit() or not count_input:
+        Label(self.master, text="Number of pings (default 10):").grid(row=2, sticky="W")
+        self.count_var = StringVar()
+        Entry(self.master, textvariable=self.count_var).grid(row=2, column=1)
+
+        Label(self.master, text="Interval in milliseconds (default 1000):").grid(
+            row=3, sticky="W"
+        )
+        self.interval_var = StringVar()
+        Entry(self.master, textvariable=self.interval_var).grid(row=3, column=1)
+
+        self.log_text = ScrolledText.ScrolledText(
+            self.master, state="disabled", height=10
+        )
+        self.log_text.grid(row=5, columnspan=2)
+
+        Button(self.master, text="Start", command=self.execute_ping).grid(
+            row=4, columnspan=2
+        )
+
+        self.setup_logging()
+
+    def setup_logging(self):
+        text_handler = GUI_TextHandler(self.log_text)
+        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+        text_handler.setFormatter(formatter)
+        logging.getLogger().addHandler(text_handler)
+        logging.getLogger().setLevel(logging.INFO)
+
+    def execute_ping(self):
+        target = self.target_var.get()
+        packet_size_input = self.packet_size_var.get()
+        count_input = self.count_var.get()
+        interval_input = self.interval_var.get()
+
+        if not target:
+            messagebox.showerror(
+                "Error", "Target cannot be empty. Please enter a valid target."
+            )
+            logging.error(
+                f"{Fore.RED}Target cannot be empty. Please enter a valid target.{Style.RESET_ALL}"
+            )
+            return
+
+        try:
+            packet_size = int(packet_size_input) if packet_size_input else None
+        except ValueError:
+            messagebox.showerror(
+                "Error",
+                "Packet size must be an integer or left empty for the default value.",
+            )
+            logging.error(
+                f"{Fore.RED}Packet size must be an integer or left empty for the default value.{Style.RESET_ALL}"
+            )
+            return
+
+        try:
             count = int(count_input) if count_input else 10
-            break
-        else:
-            logging.warning(
-                f"{Fore.YELLOW}Please enter a valid number of pings or leave it empty for default (10).{Style.RESET_ALL}"
+        except ValueError:
+            messagebox.showerror("Error", "Number of pings must be an integer.")
+            logging.error(
+                f"{Fore.RED}Number of pings must be an integer or left empty for the default value.{Style.RESET_ALL}"
             )
+            return
 
-    while True:
-        interval_input = input(
-            f"{Fore.GREEN}Enter the interval between pings in milliseconds (default 1000):{Style.RESET_ALL}\n{Fore.LIGHTCYAN_EX}> {Fore.LIGHTBLUE_EX}"
-        ).strip()
-        if interval_input.isdigit() or not interval_input:
+        try:
             interval = int(interval_input) if interval_input else 1000
-            break
-        else:
-            logging.warning(
-                f"{Fore.YELLOW}Please enter a valid interval (number in milliseconds) or leave it empty for default (1000 ms).{Style.RESET_ALL}"
+        except ValueError:
+            messagebox.showerror(
+                "Error", "Interval must be an integer expressed in milliseconds."
             )
+            logging.error(
+                f"{Fore.RED}Interval must be an integer expressed in milliseconds or left empty for the default value.{Style.RESET_ALL}"
+            )
+            return
 
-    if target:
-        logging.info(f"{Fore.GREEN}Starting plotter...{Style.RESET_ALL}")
+        logging.info(f"{Fore.LIGHTGREEN_EX}Starting plotter...{Style.RESET_ALL}")
         plotter = PingPlotter(target, packet_size, count, interval)
         plotter.plot_ping()
-    else:
-        logging.warning(
-            f"{Fore.YELLOW}Target cannot be empty. Please enter a valid target.{Style.RESET_ALL}"
-        )
+
+
+if __name__ == "__main__":
+    root = Tk()
+    my_gui = GUI(root)
+    root.mainloop()
