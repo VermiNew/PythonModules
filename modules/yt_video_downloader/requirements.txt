@@ -1,0 +1,11 @@
+# moviepy is used for video processing, including cutting, audio manipulation, and changing bitrate
+moviepy
+
+# colorama is used to simplify the use of ANSI color codes in terminal outputs, enhancing the readability of the log messages
+colorama
+
+# rich is used for rich text and beautiful formatting in the terminal, including the traceback for enhanced error messages
+rich
+
+# yt-dlp is a youtube-dl fork used for downloading videos and playlists from YouTube and other video hosting sites
+yt-dlp
