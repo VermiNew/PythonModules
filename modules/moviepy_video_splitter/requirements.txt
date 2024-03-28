@@ -1,0 +1,8 @@
+# For video file editing capabilities
+moviepy
+
+# For colored terminal text support across platforms, including Windows
+colorama
+
+# For rich text and beautiful formatting in the terminal, including enhanced traceback functionality
+rich
