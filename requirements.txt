@@ -5,28 +5,37 @@ sounddevice
 scipy
 
 # User interface
-windows-curses  # Windows support for curses (console user interface library)
+windows-curses      # Windows support for curses (console user interface library)
+
+# Clipboard access
+pyperclip           # Library for cross-platform clipboard access
 
 # Graphics and multimedia
-pygame         # Library for writing video games and multimedia applications
-moviepy        # Video editing library
-opencv-python  # OpenCV for computer vision and image processing
+pygame              # Library for writing video games and multimedia applications
+moviepy             # Video editing library
+opencv-python        # OpenCV for computer vision and image processing
 
 # Audio handling
-pyaudio        # Cross-platform audio I/O library
+pyaudio             # Cross-platform audio I/O library
 
 # Internet data retrieval
-yt-dlp         # Command-line program to download videos from YouTube and other sites
+yt-dlp              # Command-line program to download videos from YouTube and other sites
 
 # Progress monitoring and messages
-tqdm           # Fast, extensible progress bar
-colorama       # Cross-platform colored terminal text
+tqdm                # Fast, extensible progress bar
+colorama            # Cross-platform colored terminal text
 
 # Cryptography
-cryptography   # Cryptographic recipes and primitives
+cryptography         # Cryptographic recipes and primitives
 
 # HTTP library for making requests
 requests
+
+# IP address information
+ipinfo               # Library to retrieve IP address information
+
+# Geolocation
+geopy                # Library for accessing various geocoding services
 
 # Flask is the main framework used for web development.
 flask
@@ -35,4 +44,4 @@ flask
 matplotlib
 
 # Rich library for enhanced console output
-rich           # Rich text and beautiful formatting in the terminal
+rich                 # Rich text and beautiful formatting in the terminal

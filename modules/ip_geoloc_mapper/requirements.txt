@@ -1,0 +1,14 @@
+# ipinfo is used for fetching IP address details from the ipinfo.io API.
+ipinfo
+
+# pyperclip is used for copying text to the clipboard.
+pyperclip
+
+# geopy is used for geolocating IP addresses and converting them to physical addresses.
+geopy
+
+# colorama is used for adding color to console output, making it more readable.
+colorama
+
+# rich is used for creating rich, styled command line interfaces and improving logging output.
+rich
