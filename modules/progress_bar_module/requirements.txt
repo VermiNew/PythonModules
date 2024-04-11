@@ -1,0 +1,5 @@
+# Used for adding colored output in the terminal, enhancing readability and user experience.
+colorama
+
+# Provides rich traceback printing and logging, improving error analysis.
+rich
