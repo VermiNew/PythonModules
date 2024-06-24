@@ -1,3 +1,4 @@
+import shutil
 import sys
 import time
 import logging
@@ -57,7 +58,7 @@ class ANSIColorizer:
         r = int(color1[0] * ratio + color2[0] * (1 - ratio))
         g = int(color1[1] * ratio + color2[1] * (1 - ratio))
         b = int(color1[2] * ratio + color2[2] * (1 - ratio))
-        return (r, g, b)
+        return r, g, b
 
     @classmethod
     def gradient_effect(
@@ -189,7 +190,73 @@ class ANSIColorizer:
                 sys.stdout.write(f"\r{faded_text}")
                 sys.stdout.flush()
                 time.sleep(fade_duration / steps)
-            print()
+            print("")
+        except Exception as e:
+            logging.error(
+                f"Failed to execute fade in out animation: {e}", exc_info=True
+            )
+
+    @classmethod
+    def fade_in_out_center(
+        cls,
+        text,
+        color,
+        fade_duration=10,
+        steps=30,
+        bold=False,
+        underline=False,
+        strikethrough=False,
+        delay=0,
+        frame_step=0,
+    ):
+        rows = shutil.get_terminal_size().lines
+        rows = int(rows / 2)
+        print("\n" * rows)
+        
+        columns = shutil.get_terminal_size().columns
+        
+        # Center each line separately
+        centered_lines = [line.center(columns) for line in text.split('\n')]
+        centered_text = "\n".join(centered_lines)
+
+        try:
+            r, g, b = color
+            # Fade in
+            for i in range(steps // 2 + 1):
+                current_intensity = int((255 / (steps // 2)) * i)
+                faded_text = cls.style(
+                    centered_text,
+                    r=min(r, current_intensity),
+                    g=min(g, current_intensity),
+                    b=min(b, current_intensity),
+                    bold=bold,
+                    underline=underline,
+                    strikethrough=strikethrough,
+                )
+                sys.stdout.write(faded_text)
+                sys.stdout.write(f"\033[{frame_step}F")
+                sys.stdout.flush()
+                time.sleep(fade_duration / steps)
+
+            time.sleep(delay)
+
+            # Fade out
+            for i in range(steps // 2 + 1):
+                current_intensity = 255 - int((255 / (steps // 2)) * i)
+                faded_text = cls.style(
+                    centered_text,
+                    r=min(r, current_intensity),
+                    g=min(g, current_intensity),
+                    b=min(b, current_intensity),
+                    bold=bold,
+                    underline=underline,
+                    strikethrough=strikethrough,
+                )
+                sys.stdout.write(faded_text)
+                sys.stdout.write(f"\033[{frame_step}F")
+                sys.stdout.flush()
+                time.sleep(fade_duration / steps)
+            print("")
         except Exception as e:
             logging.error(
                 f"Failed to execute fade in out animation: {e}", exc_info=True
